@@ -54,8 +54,9 @@ export class MapComponent implements OnInit,AfterViewInit{
     //   .addTo(this.map);
 
 
-    //   this.map.addControl(new maplibregl.NavigationControl(),'top-right');
-    //   // this.map.addControl(new maplibregl.ScaleControl(),"bottom-right");
+       this.map.addControl(new maplibregl.NavigationControl(),'top-right');
+       this.map.addControl(new maplibregl.ScaleControl(),"bottom-right");
+       this.map.addControl(new maplibregl.FullscreenControl(), 'bottom-right')
   
     //   new maplibregl.Marker()
     //   .setLngLat([32.866287, 39.925533])
@@ -69,7 +70,13 @@ export class MapComponent implements OnInit,AfterViewInit{
 
   
   handleBasemapChange(basemap:Basemap, i:number){
-    console.log(basemap,i)
+    if(this.selectedBasemapIndex===i){
+      return;
+    }
+    this.map?.setStyle(basemap.url);
+    this.selectedBasemapIndex=i;
+
+    console.log("MAP UTIL", this.basemapList,i)
   }
   
 //  onZoomChance(event:Event){

@@ -21,12 +21,13 @@
           <div class="map-overlay-inner">
              <div class="row">
               <div class="col" *ngFor="let basemap of basemapList;let i=index ">
-                <img [src]="basemap.image" class="basemapimage" (click)="handleBasemapChange(basemap,i)">
+                <img [src]="basemap.image" class="basemapimage" (click)="handleBasemapChange(basemap,i)" [ngClass]="{'border border-primary':selectedBasemapIndex===i}">
 
               </div>
              </div> 
           </div>
       </div>
+      
 
     <!-- </div>
   </div> -->

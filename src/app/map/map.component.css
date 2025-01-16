@@ -15,7 +15,8 @@
     margin-bottom: 10px;
 }
 
-.basemmapimage{
+.basemapimage{
     height: 15px;
     width: 15px;
+    cursor: pointer;
 }
