@@ -1,9 +1,10 @@
 import { Component,OnInit, AfterViewInit } from '@angular/core';
 import maplibregl from 'maplibre-gl';
 
-import { environment } from '../../environments/environment';
-import { Basemap } from '../../models/basemap';
-import { basemapList } from '../../utilities/mapCommon';
+import { environment } from '../environments/environment';
+import { Basemap } from '../models/basemap';
+import { basemapList } from '../utilities/mapCommon';
+import { MapServicesService } from '../services/map-services.service';
 
 
 @Component({
@@ -19,10 +20,13 @@ export class MapComponent implements OnInit,AfterViewInit{
 
   basemapList:Basemap[]=basemapList;
   selectedBasemapIndex =0;
+
+  constructor(private mapservice:MapServicesService){}
   
   ngAfterViewInit(): void {
    this.initializeMap();
    console.log('map',this.map)
+   console.log(this.mapservice.addPitchControl)
   }
  
   ngOnInit(): void {
@@ -35,9 +39,16 @@ export class MapComponent implements OnInit,AfterViewInit{
       container: 'map',
       style:this.basemapList[this.selectedBasemapIndex].url,
       center: [35.243322, 38.963745],
-      zoom: 5
+      zoom: 5,
+      //pitch:0
+      
     });
-  
+    this.map.addControl(new maplibregl.NavigationControl(),'top-right');
+    this.map.addControl(new maplibregl.ScaleControl(),"bottom-right");
+    this.map.addControl(new maplibregl.FullscreenControl(), 'bottom-right')
+
+    this.mapservice.addPitchControl(this.map);
+    
     // Zoom değişimini dinle
     // this.map.on('zoom', () => {
     //   this.currentZoom = this.map!.getZoom().toFixed(2);
@@ -54,10 +65,7 @@ export class MapComponent implements OnInit,AfterViewInit{
     //   .addTo(this.map);
 
 
-       this.map.addControl(new maplibregl.NavigationControl(),'top-right');
-       this.map.addControl(new maplibregl.ScaleControl(),"bottom-right");
-       this.map.addControl(new maplibregl.FullscreenControl(), 'bottom-right')
-  
+ 
     //   new maplibregl.Marker()
     //   .setLngLat([32.866287, 39.925533])
     //   .setPopup(new maplibregl.Popup().setHTML("<h6>Ankara</h6>"))

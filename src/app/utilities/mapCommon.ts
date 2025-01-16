@@ -6,7 +6,7 @@ const maptilerKey:(string)="12z1DUufFp494sL7fgKU"
 
 export const basemapList:Basemap[]=[
 {
-    url:`https://api.maptiler.com/maps/basic-v2/style.json?key=${maptilerKey}`,
+    url:`https://api.maptiler.com/maps/topo-v2/style.json?key=${maptilerKey}`,
     image:"/assets/img/basic-v2.png",
 },
 {
@@ -14,7 +14,7 @@ export const basemapList:Basemap[]=[
     image:"assets/img/satelitte.png",
 },
 {
-    url:`https://api.maptiler.com/maps/topo-v2/style.json?key=${maptilerKey}`,
+    url:`https://api.maptiler.com/maps/basic-v2/style.json?key=${maptilerKey}`,
     image:"assets/img/topo-v2.png",
 }
 ]
