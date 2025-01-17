@@ -11,6 +11,16 @@ export class MapServicesService {
   addPitchControl(map:Map){
     map.addControl(new PitchToggle(60),'top-right')
   }
+
+  addDrawControl(){
+    const draw =new MapboxDraw({
+      displayControlsDefault:false,
+      controls:{
+        polygon:true,
+        trash:true
+      }
+    })
+  }
 }
 
 class PitchToggle{
